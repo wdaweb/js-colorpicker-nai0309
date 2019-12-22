@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>js_colorpicker</title>
+
+    <!-- google font -->
+    <!-- english -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <!-- chinese -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div
+      class="container vh-100 d-flex flex-column justify-content-center align-items-center"
+    >
+      <span id="topTxt"
+        >Pick a color you l<span style="font-size: 1.5rem;">♥︎</span>ve</span
+      >
+      <div id="outBox" class="bg-white">
+        <div id="inBox"></div>
+
+        <div id="RGBToHex" class="card-body text-center font-weight-bolder">
+          <div id="hexTxt">#000000</div>
+          <button
+            class="btn btn-sm btn-outline-warning"
+            value=""
+            onclick="randBtn()"
+          >
+            ?
+          </button>
+        </div>
+      </div>
+      <form>
+        <!-- 紅色滑動條 start -->
+        <div id="red" class="clrNum mt-2">
+          <span class="h4 r">R｜</span>
+          <input
+            id="inputR"
+            type="number"
+            value="0"
+            min="0"
+            max="255"
+            oninput="inputClr()"
+          />
+          <span class="mr-2 h6">0</span>
+          <input
+            id="redRan"
+            type="range"
+            min="0"
+            max="255"
+            step="1"
+            class="slider"
+            onchange="rangeVal()"
+            value="0"
+          />
+          <span class="ml-2 h6">255</span>
+        </div>
+        <!-- 紅色滑動條 end -->
+
+        <!-- 綠色滑動條 start -->
+        <div id="green" class="clrNum mt-2">
+          <span class="h4 g">G｜</span>
+          <input
+            id="inputG"
+            type="number"
+            value="0"
+            min="0"
+            max="255"
+            oninput="inputClr()"
+          />
+          <span class="mr-2 h6">0</span>
+          <input
+            id="greenRan"
+            type="range"
+            min="0"
+            max="255"
+            step="1"
+            class="slider"
+            onchange="rangeVal()"
+            value="0"
+          />
+          <span class="ml-2 h6">255</span>
+        </div>
+        <!-- 綠色滑動條 end -->
+
+        <!-- 藍色滑動條 start -->
+        <div id="blue" class="clrNum mt-2">
+          <span class="h4 b">B｜</span>
+          <input
+            id="inputB"
+            type="number"
+            value="0"
+            min="0"
+            max="255"
+            oninput="inputClr()"
+          />
+          <span class="mr-2 h6">0</span>
+          <input
+            id="blueRan"
+            type="range"
+            min="0"
+            max="255"
+            step="1"
+            class="slider"
+            onchange="rangeVal()"
+            value="0"
+          />
+          <span class="ml-2 h6">255</span>
+        </div>
+        <!-- 藍色滑動條 end -->
+        <div class="d-flex justify-content-center py-3">
+          <button
+            id="reset"
+            class="btn btn-outline-dark btn-sm zh-font"
+            type="reset"
+            onclick="resetAll()"
+          >
+            重置
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- bootstrap -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+      const red = document.getElementById("redRan");
+      const green = document.getElementById("greenRan");
+      const blue = document.getElementById("blueRan");
+      const clrPick = document.getElementById("inBox");
+      const hexTxt = document.getElementById("hexTxt");
+
+      // inBox最初的顏色
+      clrPick.style.backgroundColor = `rgb(${red.value},${green.value},${blue.value})`;
+
+      function RGBToHex(clr) {
+        return clr.length == 1 ? "0" + clr : clr;
+      }
+
+      // 滑動條控制數字＆顏色
+      function rangeVal(val) {
+        let valR = red.value;
+        let valG = green.value;
+        let valB = blue.value;
+        clrPick.style.backgroundColor = `rgb(${valR},${valG},${valB})`;
+        let hexR = Number(valR).toString(16);
+        let hexG = Number(valG).toString(16);
+        let hexB = Number(valB).toString(16);
+        hexTxt.innerHTML = `#${RGBToHex(hexR).toUpperCase()}${RGBToHex(
+          hexG
+        ).toUpperCase()}${RGBToHex(hexB).toUpperCase()}`;
+        $(inputR).val(red.value);
+        $(inputG).val(green.value);
+        $(inputB).val(blue.value);
+      }
+
+      const inputR = document.getElementById("inputR");
+      const inputG = document.getElementById("inputG");
+      const inputB = document.getElementById("inputB");
+
+      // 輸入數字控制數字＆顏色
+      function inputClr(val) {
+        let valR = Number(inputR.value);
+        let valG = Number(inputG.value);
+        let valB = Number(inputB.value);
+        if (valR > 255 || valG > 255 || valB > 255) {
+          alert("請輸入0~255之間的數值");
+        } else if (valR < 0 || valG < 0 || valB < 0) {
+          alert("數值不可小於0");
+        } else {
+          clrPick.style.backgroundColor = `rgb(${valR},${valG},${valB})`;
+          let hexR = valR.toString(16);
+          let hexG = valG.toString(16);
+          let hexB = valB.toString(16);
+          hexTxt.innerHTML = `#${RGBToHex(hexR).toUpperCase()}${RGBToHex(
+            hexG
+          ).toUpperCase()}${RGBToHex(hexB).toUpperCase()}`;
+          $(red).val(inputR.value);
+          $(green).val(inputG.value);
+          $(blue).val(inputB.value);
+        }
+      }
+
+      // 隨機按鈕
+      function randBtn() {
+        let rr = Math.floor(Math.random() * 255);
+        let gg = Math.floor(Math.random() * 255);
+        let bb = Math.floor(Math.random() * 255);
+        clrPick.style.backgroundColor = `rgb(${rr},${gg},${bb})`;
+
+        $(red).val(rr);
+        $(green).val(gg);
+        $(blue).val(bb);
+        $(inputR).val(rr);
+        $(inputG).val(gg);
+        $(inputB).val(bb);
+
+        let hexR = rr.toString(16);
+        let hexG = gg.toString(16);
+        let hexB = bb.toString(16);
+        hexTxt.innerHTML = `#${RGBToHex(hexR).toUpperCase()}${RGBToHex(
+          hexG
+        ).toUpperCase()}${RGBToHex(hexB).toUpperCase()}`;
+      }
+
+      //點擊重置按鈕：整個頁面reload
+      function resetAll() {
+        location.reload();
+      }
+    </script>
+  </body>
+</html>

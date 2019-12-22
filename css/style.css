@@ -1,0 +1,88 @@
+/* body */
+body{
+    background-image: url("../img/colorful-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Patrick Hand', cursive;
+}
+
+#topTxt{
+    font-size: 3rem;
+    font-style: italic;
+    color: white;
+    text-shadow:3px 3px tomato;
+}
+
+#outBox{
+    height: 470px;
+    width: 450px;
+}
+
+#inBox{
+    height: 350px;
+    width: 430px;
+    margin: 10px auto;
+    box-shadow: 3px 5px 8px rgba(92, 92, 92, 0.899);
+}
+
+#RGBToHex{
+    font-size: 3.5rem;
+    padding: 0 20px;
+}
+
+#hexTxt{
+    display: inline;
+    padding: 0 10px;
+}
+
+/* input range */
+  .slider {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 10rem;
+    height: 0.25rem;
+    outline: none;
+    border-radius: 0.25rem;
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.25rem solid #fff;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+  #red .r{
+      color: red;
+  }
+  #red .slider::-webkit-slider-thumb{
+      background-color: red !important;
+  }
+  #green .g{
+      color: green;
+  }
+  #green .slider::-webkit-slider-thumb{
+      background-color: green !important;
+  }
+  #blue .b{
+      color: blue;
+  }
+  #blue .slider::-webkit-slider-thumb{
+      background-color: blue !important;
+  }
+
+
+  /* input number */
+  input[type=number]{
+    width: 3.5rem;
+    border: 0.25rem solid #fff;
+    border-radius: 0.5rem;
+    margin: 0 5px;
+} 
+  
+.zh-font{
+    font-family: 'Noto Serif TC', serif;
+}
